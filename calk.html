@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cryptocurrency Calculator</title>
+    <style>
+        /* Main Styles */
+        body {
+            background-color: #000;
+            color: #ffffff;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .calculator-container, .result-container {
+            background-color: #000000df;
+            padding: 20px;
+            border-radius: 15px;
+            width: 300px;
+            box-shadow: 0px 0px 40px rgba(0, 170, 255, 0.4);
+            text-align: center;
+        }
+        .calculator-container h2, .result-container h2 {
+            color: #00aaff;
+        }
+        label {
+            font-size: 0.9em;
+        }
+        select, input[type="range"], input[type="number"] {
+            width: 100%;
+            margin: 8px 0;
+            padding: 5px;
+            border-radius: 5px;
+            border: none;
+            background-color: #303030;
+            color: #ffffff;
+        }
+        .button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 15px;
+            background-color: #04486a;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            font-size: 1em;
+            cursor: pointer;
+        }
+        .button:hover {
+            background-color: #0088cc;
+        }
+        .error {
+            border: 2px solid #8b0000;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .top-bar {
+            display: flex;
+            justify-content: flex-start;
+            width: 100%;
+            position: absolute;
+            top: 10px;
+            padding: 10px;
+        }
+        .back-button {
+    cursor: pointer;
+    font-size: 3em; /* Увеличен размер текста */
+    font-weight: bold; /* Жирный текст */
+    color: #00aaff; /* Цвет */
+    margin-left: 10px;
+    text-transform: uppercase; /* Преобразование текста в верхний регистр */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Тень для выделения */
+    transition: color 0.3s, transform 0.3s; /* Плавный переход при наведении */
+}
+    </style>
+</head>
+<body>
+    <div class="top-bar">
+        <span class="back-button" onclick="goBack()">←</span>
+    </div>
+
+    <div class="calculator-container" id="calculator">
+        <h2>Calculator</h2>
+
+        <!-- Cryptocurrency selection -->
+        <label for="crypto">Cryptocurrency:</label>
+        <select id="crypto">
+            <option value="btc">BTC</option>
+            <option value="doge">DOGE</option>
+        </select>
+
+        <!-- Input sliders for parameters -->
+        <label for="deposit">Deposit ($):</label>
+        <input type="range" id="deposit" min="10" max="10000" step="10" value="1000">
+        <input type="number" id="deposit-value" value="1000" readonly>
+
+        <label for="risk">Risk (%):</label>
+        <input type="range" id="risk" min="1" max="100" value="2">
+        <input type="number" id="risk-value" value="2" readonly>
+
+        <label for="entry">Entry Price ($):</label>
+        <input type="range" id="entry" min="1" max="100000" step="1" value="20000">
+        <input type="number" id="entry-value" value="20000" readonly>
+
+        <label for="stopLoss">Stop-Loss ($):</label>
+        <input type="range" id="stopLoss" min="1" max="100000" step="1" value="19000">
+        <input type="number" id="stopLoss-value" value="19000" readonly>
+
+        <!-- Calculate button -->
+        <button class="button" id="calculate">Take-Profit</button>
+    </div>
+
+    <div class="result-container" id="result" style="display: none;">
+        <!-- Result will be inserted here -->
+    </div>
+
+    <script>
+        const depositSlider = document.getElementById('deposit');
+        const depositValue = document.getElementById('deposit-value');
+        const riskSlider = document.getElementById('risk');
+        const riskValue = document.getElementById('risk-value');
+        const entrySlider = document.getElementById('entry');
+        const entryValue = document.getElementById('entry-value');
+        const stopLossSlider = document.getElementById('stopLoss');
+        const stopLossValue = document.getElementById('stopLoss-value');
+        const calculatorContainer = document.getElementById('calculator');
+        const resultContainer = document.getElementById('result');
+
+        function goBack() {
+            window.location.href = 'index1.html';
+        }
+
+        depositSlider.oninput = () => depositValue.value = depositSlider.value;
+        riskSlider.oninput = () => riskValue.value = riskSlider.value;
+        entrySlider.oninput = () => entryValue.value = entrySlider.value;
+        stopLossSlider.oninput = () => stopLossValue.value = stopLossSlider.value;
+
+        document.getElementById('calculate').onclick = () => {
+            const deposit = parseFloat(depositValue.value);
+            const riskPercentage = parseFloat(riskValue.value);
+            const entryPrice = parseFloat(entryValue.value);
+            const stopLossPrice = parseFloat(stopLossValue.value);
+
+            if (entryPrice <= stopLossPrice) {
+                resultContainer.innerHTML = '<div class="error"><p>Error: Stop-loss must be less than entry price.</p><button class="button" onclick="tryAgain()">Try Again</button></div>';
+                resultContainer.style.display = 'block';
+                calculatorContainer.style.display = 'none';
+                return;
+            }
+
+            const riskAmount = (deposit * riskPercentage) / 100;
+            const coinQuantity = riskAmount / (entryPrice - stopLossPrice);
+            const takeProfitPrice = entryPrice + (entryPrice - stopLossPrice);
+
+            resultContainer.innerHTML = `
+                <h2>Results</h2>
+                <p>Coin Quantity: ${coinQuantity.toFixed(6)}</p>
+                <p>Total Purchase: $${(coinQuantity * entryPrice).toFixed(2)}</p>
+                <p>Stop-Loss: $${stopLossPrice}</p>
+                <p>Take-Profit: $${takeProfitPrice.toFixed(2)}</p>
+                <p>Risk: $${riskAmount.toFixed(2)} out of $${deposit}</p>
+                <button class="button" id="reset">Reset</button>
+            `;
+            resultContainer.style.display = 'block';
+            calculatorContainer.style.display = 'none';
+
+            document.getElementById('reset').onclick = () => resetCalculator();
+        };
+
+        function tryAgain() {
+            resultContainer.style.display = 'none';
+            calculatorContainer.style.display = 'block';
+        }
+
+        function resetCalculator() {
+            resultContainer.style.display = 'none';
+            calculatorContainer.style.display = 'block';
+            depositSlider.value = 1000;
+            depositValue.value = 1000;
+            riskSlider.value = 2;
+            riskValue.value = 2;
+            entrySlider.value = 20000;
+            entryValue.value = 20000;
+            stopLossSlider.value = 19000;
+            stopLossValue.value = 19000;
+        }
+    </script>
+</body>
+</html>

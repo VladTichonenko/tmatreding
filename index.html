@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Loading</title>
+	<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+	<div id="loading">
+		<span></span>
+		<span></span>
+		<span></span>
+		<span></span>
+		<div class="text">
+			Loading
+			<span class="dot">.</span>
+			<span class="dot">.</span>
+			<span class="dot">.</span>
+		</div>
+	</div>
+</body>
+</html>
+<script>
+	// Задержка 5 секунд, затем редирект на index1.html
+	setTimeout(function() {
+		window.location.href = 'index1.html';  // Перенаправление на файл index1.html
+	}, 5000);  // 5000 миллисекунд = 5 секунд
+</script>

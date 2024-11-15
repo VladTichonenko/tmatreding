@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crypto Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+  
+</head>
+<body>
+    <div class="container">
+        <!-- Header Section -->
+        <header class="header">
+            <div class="balance">
+                <h1 id="balanceText">$15,392.75</h1>
+            </div>
+            
+            <!-- Кнопка "гамбургер" в правом верхнем углу -->
+            <div class="hamburger-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </header>
+
+        <!-- Панель выбора режима торговли -->
+        <div class="trading-mode-panel" id="tradingModePanel">
+            <div style="display: flex; align-items: center;">
+                <div class="icon">🔄</div>
+                <span>Trading mode</span>
+            </div>
+            <span class="arrow">▼</span>
+        </div>
+
+        <!-- Выдвижной блок для выбора режима -->
+        <div class="trading-options-block" id="tradingOptionsBlock">
+            <h3>Switch trading mode</h3>
+            <label class="option">
+                <input type="radio" name="tradeMode" value="Real balance" checked>
+                <div class="option-content">
+                    <div class="option-title">Real balance</div>
+                    <div class="option-description">Какой-то текст.</div>
+                </div>
+            </label>
+            <label class="option">
+                <input type="radio" name="tradeMode" value="Game score">
+                <div class="option-content">
+                    <div class="option-title">Game score</div>
+                    <div class="option-description">Какой-то текст.</div>
+                </div>
+            </label>
+            <button class="close-button" id="closeButton">Закрыть</button>
+        </div>
+
+        <!-- Tab Navigation -->
+        <div class="tabs">
+            <button class="tab active" data-tab="crypto">TRADING</button>
+            <button class="tab" data-tab="nfts">MINING</button>
+            <button class="tab" data-tab="defi">SOCIAL</button>
+        </div>
+
+        <!-- Содержимое главной вкладки -->
+        <div class="tab-content active" id="crypto-content">
+            <div class="center-wrapper"> <!-- Обёрточный контейнер -->
+            <div class="crypto-buttons">
+                <div class="crypto-btn">
+                    <div class="crypto-info">
+                        <h3>Trading</h3>
+                        <p class="price">Income: 2-3%</p>
+                        <p class="time">Risk: 10%</p>
+                    </div>
+                </div>
+                <div class="crypto-btn">
+                    <div class="crypto-info">
+                        <h3>Option</h3>
+                        <p class="price">Income: 3-5%</p>
+                        <p class="time">Risk: 11%</p>
+                    </div>
+                </div>
+                <div class="crypto-btn" id="calk">
+                    <div class="crypto-info">
+                        <h3>Сalculator</h3>
+                        <p class="price">crypto calculator</p>
+
+                    </div>
+                </div>
+                <div class="crypto-btn">
+                    <div class="crypto-info">
+                        <h3>Futures</h3>
+                        <p class="price">Income: 4-6%</p>
+                        <p class="time">Risk: 15%</p>
+                    </div>
+                </div>
+                <div class="crypto-btn">
+                    <div class="crypto-info">
+                        <h3>Liquidity mining</h3>
+                        <p class="price">Income: 3-4%</p>
+                        <p class="time">Risk: 8%</p>
+                    </div>
+                </div>
+                <div class="crypto-btn">
+                    <div class="crypto-info">
+                        <h3>For real money</h3>
+                      
+                        <br><i class="fa-solid fa-dollar-sign" style="font-size: 26px;"></i> <!-- Задаём размер в пикселях -->
+                    </div>
+                </div>
+                <div class="crypto-btn">
+                    <div class="crypto-info">
+                        <h3>Comming soon</h3>
+                      
+                        <br><i class="fa-solid fa-face-frown" style="font-size: 26px;"></i> <!-- Задаём размер в пикселях -->
+                    </div>
+                </div>
+                <div class="crypto-btn">
+                    <div class="crypto-info">
+                        <h3>Comming soon</h3>
+                      
+                        <br><i class="fa-solid fa-face-frown" style="font-size: 26px;"></i> <!-- Задаём размер в пикселях -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+        <!-- Содержимое вкладок "coming soon" -->
+        <div class="tab-content" id="nfts-content">
+            <p> - coming soon...</p>
+        </div>
+
+        <div class="tab-content" id="defi-content">
+            <div class="defi-buttons">
+                <div class="defi-btn">
+                    <img src="SE3.webp" alt="Defi Icon" class="defi-icon">
+                    <div class="defi-info">
+                        <h3>Task 1</h3>
+                        <hr />
+                        <p class="description">Subscribe to our page in X.</p>
+                        <p class="price">$500.00</p>
+                    </div>
+                </div>
+                <div class="defi-btn">
+                    <img src="tg.webp" alt="Defi Icon" class="defi-icon">
+                    <div class="defi-info">
+                        <h3>Task 2</h3>
+                        <hr />
+                        <p class="description">Subscribe to our page in Telegram.</p>
+                        <p class="price">$1,200.00</p>
+                    </div>
+                </div>
+                <div class="defi-btn">
+                    <img src="tg.webp" alt="Defi Icon" class="defi-icon">
+                    <div class="defi-info">
+                        <h3>Task 3</h3>
+                        <hr />
+                        <p class="description">Subscribe to the partners page in Telegram.</p>
+                        <p class="price">$800.00</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+
+<!-- Bottom Navigation -->
+<nav class="bottom-nav">
+    <div class="nav-item"><i class="fa-solid fa-house" id="home-icon"></i></div>
+    <div class="nav-item"  id="open-chart"><i class="fa-solid fa-chart-line"></i></div>
+    <div class="nav-item" id="open-search"><i class="fa-regular fa-newspaper"></i></div>
+    <div class="nav-item"><i class="fa-solid fa-star"></i></div>
+</nav>
+
+
+
+    <!-- Боковое меню -->
+    <div class="side-menu" id="side-menu">
+        <div class="menu-content">
+            <p>Profile</p>
+            <p>Settings</p>
+            <p>Help</p>
+            <p id="bitry-link">BiTry-Studio <i class="fa-solid fa-code"></i></p>
+
+        </div>
+    </div>
+
+<script src="script.js"></script>
+
+
+</body>
+</html>
+
+<script>
+    document.getElementById('open-search').addEventListener('click', function() {
+    console.log("Navigating to search page..."); // Отладка
+    window.location.href = 'graf.html';
+});
+
+
+document.getElementById('calk').addEventListener('click', function() {
+    window.location.href = 'calk.html';
+});
+
+document.getElementById('bitry-link').addEventListener('click', function () {
+        window.open('https://t.me/ITtbcstudio', '_blank'); // Открывает ссылку в новой вкладке
+    });
+
+</script>
